@@ -23,7 +23,7 @@ public class OrderService {
     public OrderDto add(OrderDto orderDto) {
         Order order;
         order = OrderDtoMapper.INSTANCE.toEntity(orderDto);
-        order.setId(UUID.randomUUID());
+        order.setUuid(UUID.randomUUID());
         return OrderDtoMapper.INSTANCE.toDto(repository.save(order));
     }
     public OrderDto getById(UUID id) {

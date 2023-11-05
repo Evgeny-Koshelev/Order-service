@@ -32,6 +32,7 @@ public class OrderController {
     @PostMapping(path = "/create", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDto> createOrder( @RequestBody OrderDto orderDto){
         OrderDto getOrderDto = service.add(orderDto);
+        orderDto.setUuid(UUID.randomUUID());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<OrderDto> requestEntity = new HttpEntity<>(getOrderDto, headers);
