@@ -15,13 +15,13 @@ import java.util.UUID;
 @Builder
 public class OrderDto {
 
-    private  UUID id;
+    private  UUID uuid;
 
-    private Timestamp date;
+    private Timestamp timestamp;
 
     private Integer sum;
 
     private UUID clientId;
 
-    private String orderItemsList;
+    private List<String> products;
 }

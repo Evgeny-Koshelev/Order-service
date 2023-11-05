@@ -28,11 +28,12 @@ public class OrderController {
     @PostMapping(path = "/create", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<OrderDto> createOrder( @RequestBody OrderDto orderDto){
         OrderDto getOrderDto = service.add(orderDto);
+        orderDto.setUuid(UUID.randomUUID());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<OrderDto> requestEntity = new HttpEntity<>(getOrderDto, headers);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity("http://localhost:8090/delivery/createDelivery", requestEntity, String.class);
+        restTemplate.postForEntity("http://localhost:8083/delivery/createDelivery", requestEntity, String.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(Objects.requireNonNullElseGet(getOrderDto, OrderDto::new));
 
     }

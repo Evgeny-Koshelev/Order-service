@@ -1,6 +1,6 @@
 CREATE TABLE if not exists orders
 (
-    id uuid not null,
+    uuid uuid not null,
     date Timestamp,
     client_id uuid not null,
     sum integer not null,
