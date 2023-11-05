@@ -1,0 +1,14 @@
+version: '16.0'
+
+services:
+ postgres:
+   container_name: postgres
+   image: postgres:16.0-alpine
+   ports:
+     - "5432:5432"
+   environment:
+     POSTGRES_DATABASE: "mydatabase"
+     POSTGRES_USER: root
+     POSTGRES_PASSWORD: root
+   volumes:
+      - ./init:/docker-entrypoint-initdb.d
