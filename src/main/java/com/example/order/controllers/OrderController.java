@@ -37,7 +37,7 @@ public class OrderController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<OrderDto> requestEntity = new HttpEntity<>(getOrderDto, headers);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity(deliveryService, requestEntity, String.class);
+        restTemplate.postForEntity("http://localhost:8083/delivery/createDelivery", requestEntity, String.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(Objects.requireNonNullElseGet(getOrderDto, OrderDto::new));
 
     }
