@@ -3,6 +3,7 @@ import com.example.order.controllers.dto.OrderDto;
 import com.example.order.entities.Order;
 import com.example.order.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestOperations;
@@ -18,6 +19,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/order-service")
 public class OrderController {
 
+    @Value( "${deliveryService}" )
+    String deliveryService;
+
     private final OrderService service;
 
     @Autowired
@@ -32,7 +36,7 @@ public class OrderController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<OrderDto> requestEntity = new HttpEntity<>(getOrderDto, headers);
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity("http://localhost:8090/delivery/createDelivery", requestEntity, String.class);
+        restTemplate.postForEntity(deliveryService, requestEntity, String.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(Objects.requireNonNullElseGet(getOrderDto, OrderDto::new));
 
     }
